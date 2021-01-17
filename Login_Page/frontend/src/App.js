@@ -1,4 +1,5 @@
 import React from 'react';
+import UserStore from './store/UserStore'
 import './App.css';
 
 class App extends React.Component {
