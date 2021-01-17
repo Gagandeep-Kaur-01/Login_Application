@@ -100,7 +100,37 @@ class Router {
 
     isLoggedIn(app, db) {
 
+        app.post('/isLoggedIn', (req, res) => {
+
+          if (req.session.userID) {
+
+            let cols = [req.session.userID];
+            db.query('SELECT * FROM user WHERE id = ? LIMIT 1', cols, (err, data, fields) => {
+                if(data && data.length === 1) {
+                    res.json({
+                        success: true,
+                        username: data[0].username
+                    })
+
+                    return true;                    
+                }   
+                else {
+                    res.json({
+                        success: false
+                    })
+                }
+            });         
+
+          } else{
+              res.json({
+                success: false
+              })
+            }
+
+        });      
+
     }
+
 
 }
 
